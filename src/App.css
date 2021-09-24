@@ -1,5 +1,10 @@
+:root {
+  --border-color: hotpink;
+
+}
 .App {
   text-align: center;
+  background-color:white;
 }
 
 .App-logo {

@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+
 import './App.css';
+import NavBar from './components/navBar';
+import Footer from "./components/footer";
+import Catalog from './components/catalog';
+import  Home from "./components/home";
+import About from "./components/about";
+import Admin from "./components/admin";
+import Cart from "./components/cart";
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import"bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import GlobalState from './context/globalState';
+
 
 function App() {
   return (
+    <GlobalState>
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NavBar></NavBar>  
+  <div className="container-fluid">
+    <Switch>
+      <Route path= "/" exact component={Home}></Route>
+      <Route path= "/home" exact component={Home}></Route>
+      <Route path= "/catalog" exact component={Catalog}></Route>
+      <Route path= "/about" exact component={About}></Route>
+      <Route path= "/admin" exact component={Admin}></Route>
+      <Route path= "/cart"  exact component={Cart}></Route>
+
+    </Switch>
+</div>
+
+<Footer></Footer>
+  </div>
+  </BrowserRouter>
+  </GlobalState>
   );
 }
 
 export default App;
+

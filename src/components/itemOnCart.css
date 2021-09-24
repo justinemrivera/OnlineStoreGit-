@@ -1,0 +1,24 @@
+.item-on-cart{
+    display:flex;
+    align-items: center;
+    border: 1px solid #333;
+    background-color: #e9ecef; 
+    padding: 10px 20x;
+    border-radius: 6px;
+    margin: 10px 15px;
+}
+.item-on-cart img{
+flex:1;
+height: 120px;
+margin-right: 10px;
+border-radius: 6px;
+}
+
+.item-on-cart .item-info{
+flex:4;
+}
+
+.item-on-cart label{
+flex:2;
+font: 16px;
+}
