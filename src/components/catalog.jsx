@@ -10,9 +10,9 @@ const Catalog = () => {
   let [categories, setCategories] = useState([]);
 
   //logic (fns)
-  const retreiveCatalog = () => {
+  const retreiveCatalog = async () => {
     let service = new ItemService();
-    let cat = service.getCatalog();
+    let cat = await service.getCatalog();
     setProducts(cat);
     setItemsOnDisplay(cat);
     console.log(cat);
@@ -86,4 +86,3 @@ const Catalog = () => {
   );
 };
 export default Catalog;
-

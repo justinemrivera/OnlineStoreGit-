@@ -31,7 +31,18 @@ const GlobalState = (props) => {
   };
 
   const removeFromCart = (productId) => {
+    let copy = [...cart];
     console.log("removing", productId);
+    for (let i = 0; i < copy.length; i++) {
+      let prod = copy[i];
+      if (prod._id == productId) {
+        console.log("Found it");
+        //remove prod from the array
+        copy.splice(i, 1);
+        break; //end for loop
+      }
+    }
+    setCart(copy);
   };
 
   return (

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./admin.css";
+import ItemService from "../services/itemService";
+
 const Admin = () => {
   const [product, setProduct] = useState({});
 
@@ -8,7 +10,7 @@ const Admin = () => {
     let value = event.target.value;
 
     // create a copy of the object
-    let copy = { ...product }; //creat a hard copy of an object
+    let copy = { ...product }; //create a hard copy of an object
     // modify the copy
     copy[name] = value;
     // set the copy to the state
@@ -16,7 +18,15 @@ const Admin = () => {
   };
 
   const register = () => {
-    console.log(product);
+    var copy = { ...product };
+    copy.price = parseFloat(copy.price);
+    copy.discount = parseFloat(copy.discount);
+    copy.stock = +copy.stock;
+    copy.minimum = copy.minimum * 1;
+
+    console.log(copy);
+    let service = new ItemService();
+    service.saveItem(copy);
   };
 
   return (

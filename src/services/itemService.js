@@ -1,3 +1,4 @@
+import axios from 'axios';
 var data = [
     {
     _id: "111",
@@ -84,9 +85,26 @@ var data = [
 ];
 
 class ItemService {
-
-    getCatalog() {
-        return data;
+    //use axios to get the data from the server(backend)
+    async getCatalog() {
+        //use axios to get the data from the server (back end)
+       let response = await axios.get('http://127.0.0.1:5000/api/catalog');
+       return response.data;
+        
+       
     }
+
+    //return a saveItem function
+    /**recieve the item as parameter
+     * send the item on post request to "http://127.0.0.1:5000/api/catalog"
+     */
+    async saveItem(item) {
+    try {
+        let response = await axios.post("http://127.0.0.1:5000/api/catalog",item);
+        console.log("result of saving", response.data)
+    } catch {
+        console.log("Error, product no saved");
+    }
+}
 }
 export default ItemService;

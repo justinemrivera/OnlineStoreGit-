@@ -7,6 +7,16 @@ function NavBar() {
   //connect and get cart
   const cart = useContext(StoreContext).cart;
 
+  const getTotalItems = () => {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+      let prod = cart[i];
+      total += prod.quantity;
+    }
+
+    return total;
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
@@ -44,7 +54,7 @@ function NavBar() {
           </ul>
           <form className="d-flex">
             <Link className="btn btn-outline-light" to="/cart">
-              <span className="badge bg-primary me-2">{cart.length}</span>
+              <span className="badge bg-primary me-2">{getTotalItems()}</span>
               View Cart
             </Link>
           </form>

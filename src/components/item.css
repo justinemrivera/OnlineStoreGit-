@@ -31,7 +31,7 @@ width: 100%;
 border:black;
 }
 .item:hover img{
-
+color:red;
 }
 
 .item h5{
