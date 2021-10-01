@@ -4,6 +4,7 @@ import ItemService from "../services/itemService";
 
 const Admin = () => {
   const [product, setProduct] = useState({});
+  const [coupon, setCoupon] = useState({});
 
   const textChange = (event) => {
     let name = event.target.name;
@@ -15,6 +16,13 @@ const Admin = () => {
     copy[name] = value;
     // set the copy to the state
     setProduct(copy);
+  };
+  const cctextChange = (event) => {
+    let name = event.target.name;
+    let value = event.target.value;
+    let copy = { ...coupon };
+    copy[name] = value;
+    setCoupon(copy);
   };
 
   const register = () => {
@@ -28,45 +36,77 @@ const Admin = () => {
     let service = new ItemService();
     service.saveItem(copy);
   };
+  const Apply = () => {
+    var discount = { ...coupon };
+    discount.code = parseFloat(discount.code);
+    discount.price = parseFloat(discount.price);
+    discount.discount = parseFloat(discount.discount);
+
+    console.log("coupon applied");
+    console.log(coupon);
+  };
 
   return (
-    <div className="admin-page">
-      <h1>Store Management</h1>
+    <div className="admin-page row">
+      <div className="column">
+        <h2>Store Management</h2>
 
-      <div className="my-control">
-        <label>Title</label>
-        <input type="text" name="title" onChange={textChange} />
+        <div className=" my-control">
+          <label>Title:</label>
+          <input type="text" name="title" onChange={textChange} />
+        </div>
+
+        <div className="my-control">
+          <label>Price:</label>
+          <input type="text" name="price" onChange={textChange} />
+        </div>
+
+        <div className="my-control">
+          <label>Category:</label>
+          <input type="text" name="category" onChange={textChange} />
+        </div>
+
+        <div className="my-control">
+          <label>Image:</label>
+          <input type="text" name="image" onChange={textChange} />
+        </div>
+
+        <div className="my-control">
+          <label>Discount:</label>
+          <input type="text" name="image" onChange={textChange} />
+        </div>
+
+        <div className="my-control">
+          <label>Minimum:</label>
+          <input type="text" name="minimum" onChange={textChange} />
+        </div>
+
+        <div className="my-control">
+          <button className="btn-dark" onClick={register}>
+            Register Item
+          </button>
+        </div>
       </div>
+      <div className="column">
+        <div className="my-coupons">
+          <h4>Apply Coupons</h4>
 
-      <div className="my-control">
-        <label>Price</label>
-        <input type="text" name="price" onChange={textChange} />
-      </div>
+          <div className="my-coupons">
+            <label>Code:</label>
+            <input type="text" name="code" onChange={cctextChange} />
+          </div>
 
-      <div className="my-control">
-        <label>Category</label>
-        <input type="text" name="category" onChange={textChange} />
-      </div>
+          <div className="my-coupons">
+            <label>discount:</label>
+            <input type="text" name="discount" onChange={cctextChange} />
+          </div>
 
-      <div className="my-control">
-        <label>Image</label>
-        <input type="text" name="image" onChange={textChange} />
-      </div>
-
-      <div className="my-control">
-        <label>Discount</label>
-        <input type="text" name="image" onChange={textChange} />
-      </div>
-
-      <div className="my-control">
-        <label>Minimum</label>
-        <input type="text" name="minimum" onChange={textChange} />
-      </div>
-
-      <div className="my-control">
-        <button className="btn-dark" onClick={register}>
-          Register Item
-        </button>
+          <div className="my-coupons">
+            <button className="btn btn-info" onClick={Apply}>
+              Register code
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

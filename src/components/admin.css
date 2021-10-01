@@ -1,8 +1,36 @@
 .admin-page .my-control {
-    margin-bottom: 13px;
+  margin-bottom: 20px;
 }
 
-.admin-page .my-control label {
-    display: inline-block;
+
+.row {
+    display: flex;
+
+  }
+  
+  .column {
+    flex: 50%;
+    background-color: black;
+  }
  
-}
+ .my-control label{
+     color: white;
+     display: grid;
+     margin-left:auto ;
+     margin-right: auto;
+  }
+  
+  h2{color: white;
+     padding-top: 20px;
+  }
+
+  h4{
+      color: white;
+      padding-top: 20px;
+  }
+
+  .my-coupons label{
+      color:white ;
+      font-weight: 600;
+      display:grid;
+  }
