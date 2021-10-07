@@ -41,7 +41,7 @@ const Item = (props) => {
       <img src={"/images/" + props.data.image} alt="pic"></img>
       <h6>{props.data.title}</h6>
 
-      <label>{getTotal()}</label>
+      <label>$ {getTotal()}</label>
       <label>$ {props.data.price.toFixed(2)}</label>
 
       {getControls()}

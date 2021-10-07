@@ -1,9 +1,14 @@
 import "./cart.css";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import StoreContext from "../context/storeContext";
 import ItemOnCart from "./itemOnCart";
+import ItemService from "../services/itemService";
 
 const Cart = () => {
+  const [couponCode, setCouponCode] = useState("");
+  const [couponError, setCouponError] = useState(false);
+  const [couponObj, setCouponObj] = useState(null);
+  const [order, setOrder] = useState("");
   const cart = useContext(StoreContext).cart;
 
   const getTotal = () => {
@@ -11,6 +16,10 @@ const Cart = () => {
     for (let i = 0; i < cart.length; i++) {
       let prod = cart[i];
       total += prod.price * prod.quantity;
+    }
+    if (couponObj) {
+      let discount = couponObj.discount;
+      total = total - (total * discount) / 100;
     }
     return total.toFixed(2);
   };
@@ -23,6 +32,30 @@ const Cart = () => {
       </div>
     );
   }
+  const codeChange = (event) => {
+    setCouponCode(event.target.value);
+    console.log(event.target.value);
+  };
+
+  const handleValidate = async () => {
+    console.log("validate", couponCode);
+    let service = new ItemService();
+    let res = await service.validateCoupon(couponCode);
+    console.log(res);
+    if (!res) {
+      setCouponError(true);
+      return;
+    }
+    setCouponError(false);
+    setCouponObj(res);
+  };
+  const handleSave = async () => {
+    console.log("order");
+    let service = new ItemService();
+    let order = { userId: 42, coupon: couponObj, products: cart };
+    let res = await service.saveOrder(order);
+    console.log(res);
+  };
 
   return (
     <div className="cart-page">
@@ -40,7 +73,22 @@ const Cart = () => {
           <h5>Order Total:</h5>
           <h3>$ {getTotal()}</h3>
           <hr />
-          <button ClassName="btn btn-block btn-primary">Submit Order</button>
+          <button ClassName="btn btn-block btn-primary" onClick={handleSave}>
+            Submit Order
+          </button>
+        </div>
+      </div>
+      <div className="coupon-cart">
+        <div>
+          <label>Do you have a coupon?</label>
+          {couponError ? (
+            <div className="alert alert-danger"> Invalid Code</div>
+          ) : null}
+
+          <input placeholder="Apply Coupon" name="code" onChange={codeChange} />
+          <button className="btn btn-sm btn-info" onClick={handleValidate}>
+            Validate
+          </button>
         </div>
       </div>
     </div>

@@ -34,3 +34,14 @@
       font-weight: 600;
       display:grid;
   }
+
+  .coupons-container{
+    
+    color:white;
+    padding-top: 30px;
+
+  }
+  .coupons-container ul{
+    list-style: none;
+    margin-right: 20px;
+  }
